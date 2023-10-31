@@ -1,0 +1,41 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* NAV BARRE INDEX */
+
+nav {
+    background-color: #b9b9b9;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 20px;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+nav button {
+    background-color: #a9a9a9;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+nav button:hover {
+    background-color: #b9b9b9;
+}
+
+/* FOOTER INDEX */
+
+footer {
+    background-color: #b9b9b9;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
