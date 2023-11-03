@@ -7,7 +7,7 @@ html, body {
 /* NAV BARRE INDEX */
 
 nav {
-    background-color: #b9b9b9;
+    background-color: var(--vert);
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
@@ -19,6 +19,7 @@ nav {
 }
 
 .titre {
+    font-size: large; 
     font-weight: bold;
     font-variant: small-caps;
 }
@@ -26,6 +27,7 @@ nav {
 .search-form {
     display: flex;
     align-items: center;
+    margin-left: 25px;
 }
 
 .search-input {
@@ -33,6 +35,12 @@ nav {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    border-color: #28a745;
 }
 
 .search-button {
@@ -47,7 +55,7 @@ nav {
 /* FOOTER INDEX */
 
 footer {
-    background-color: #b9b9b9;
+    background-color: var(--vert);
     color: white;
     padding: 20px;
     text-align: center;
@@ -55,4 +63,10 @@ footer {
 
 footer a {
     text-decoration: none;
+}
+
+/* COULEUR */
+
+:root{
+    --vert: #BED4C1;
 }
