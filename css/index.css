@@ -17,18 +17,31 @@ nav {
     top: 0;
     left: 0;
 }
-nav button {
-    background-color: #a9a9a9;
-    border-radius: 4px;
-    color: white;
+
+.titre {
     font-weight: bold;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
+    font-variant: small-caps;
 }
-nav button:hover {
-    background-color: #b9b9b9;
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* FOOTER INDEX */
@@ -38,4 +51,8 @@ footer {
     color: white;
     padding: 20px;
     text-align: center;
+}
+
+footer a {
+    text-decoration: none;
 }
