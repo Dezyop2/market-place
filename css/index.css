@@ -11,26 +11,25 @@ nav {
     background-color: var(--vert);
     overflow: hidden;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    padding: 0px 20px;
     width: 100%;
     top: 0;
-    left: 0;
 }
 
 .profil {
+    display: flex;
+    margin-left: auto;
     font-size: 24px;
     color: var(--vert-fonce);
     margin: 15px;
     text-decoration: none;
-    float: right;
 }
 
 .titre {
     font-size: large; 
     font-weight: bold;
     font-variant: small-caps;
+    margin: 15px;
 }
 
 .search-form {
@@ -88,7 +87,8 @@ footer {
     bottom: 0;
     width: 100%;
     background-color: var(--vert);
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
 }
 
