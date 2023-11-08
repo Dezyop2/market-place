@@ -4,17 +4,14 @@ require_once 'connexion.php';
 $pdoManager = new DBManagement('market-nws');
 $pdo = $pdoManager->getPDO();
 
-class UserManagement
-{
+class UserManagement{
     private $pdo;
 
-    public function __construct(PDO $pdo)
-    {
+    public function __construct(PDO $pdo){
         $this->pdo = $pdo;
     }
 
-    public function addUserAsAdmin($login, $password)
-    {
+    public function addUserAsAdmin($login, $password){
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO marketadmin (nom, mdp) VALUES (?, ?)";

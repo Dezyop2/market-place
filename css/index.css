@@ -29,7 +29,9 @@ nav {
     font-size: large; 
     font-weight: bold;
     font-variant: small-caps;
+    color: var(--vert-fonce);
     margin: 15px;
+    text-decoration: none;
 }
 
 .search-form {
