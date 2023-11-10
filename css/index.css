@@ -101,6 +101,69 @@ footer {
     text-decoration: none;
 }
 
+/* CREATION PRODUIT ADMIN */
+
+.product-form {
+    background-color: var(--vert);
+    border: 1px solid #ccc;
+    margin-left: 500px;
+    margin-right: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: var(--vert-hover);
+}
+
+.form-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-input {
+    background-color: var(--vert-fonce);
+    color: #fff;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-input:hover {
+    background-color: var(--vert-hover);
+}
+
+.submit-button {
+    background-color: var(--vert-fonce);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: var(--vert-hover);
+}
+
+.image {
+    font-weight: bold;
+    font-variant: small-caps;
+    color: var(--vert-hover);
+    margin-bottom: 20px;
+}
+
 /* COULEURS */
 
 :root{
