@@ -6,6 +6,7 @@ $pdo = $pdoManager->getPDO();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["action"])) {
+        echo "deuxieme étape";
         if ($_POST["action"] == "create") {
 
                 // CREATE (Ajouter un produit)
@@ -30,12 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(3, $bio, PDO::PARAM_STR);
             $stmt->bindParam(4, $stock, PDO::PARAM_STR);
             $stmt->bindParam(5, $imageData, PDO::PARAM_LOB);
-            $stmt->bindParam(6, $imageType, PDO::PARAM_STR);
+            $stmt->bindParam(6, $imageType, PDO::PARAM_STR);            
 
             if ($stmt->execute()) {
                 echo "Le produit a été ajouté avec succès.";
             } else {
                 echo "Erreur : " . $stmt->error;
+                echo "erreur ajout";
             }
         } elseif ($_POST["action"] == "update") {
 
@@ -70,6 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Erreur : " . $stmt->error;
             }
         }
+    }else{
+        echo "etape 1 raté";
     }
 }
 

@@ -1,6 +1,8 @@
 <?php include_once 'templates/headerAdmin.html'; ?>
 
 <form class="product-form" method="POST" action="php/CRUD.php" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="create">
+
     <label for="nom" class="form-label">Nom du produit :</label>
     <input type="text" id="nom" name="nom" class="form-input" required><br>
     <label for="prix" class="form-label">Prix du produit :</label>
