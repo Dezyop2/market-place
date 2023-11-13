@@ -4,4 +4,8 @@
 gdetfdtefdtefdtefdteftdf
 <br>
 
+<?php
+    
+?>
+
 <?php include_once 'templates/footer.html'; ?>

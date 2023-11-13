@@ -9,7 +9,11 @@
 </head>
 <body>
     <nav>
-        <a class="titre">ACCUEIL</a>
-        <button class="all-goods" type="submit">Creer</button>
-        <button class="all-goods" type="submit">Modifier</button>
+        <a href="index.php" class="titre">ACCUEIL</a>
+        <form action="Admin.php" type="submit">
+            <button class="all-goods" type="submit">Creer</button>
+        </form>
+        <form action="AdminModif.php" method="GET">
+            <button class="all-goods" type="submit">Modifier</button>
+        </form>
     </nav>

@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO produit (nom, prix, bio, stock, image_data, image_type) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    // $stmt->bind_param("ssssbs", $nom, $prix, $bio, $stock, $imageData, $imageType);
     $stmt->bindParam(1, $nom, PDO::PARAM_STR);
     $stmt->bindParam(2, $prix, PDO::PARAM_STR);
     $stmt->bindParam(3, $bio, PDO::PARAM_STR);
