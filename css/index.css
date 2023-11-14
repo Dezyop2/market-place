@@ -5,6 +5,10 @@ html, body {
     height: 100%;
 }
 
+body {
+    margin-bottom: 60px; 
+}
+
 .titre_stock {
     font-size: xx-large; 
     font-weight: bold;
@@ -95,7 +99,7 @@ nav {
 /* FOOTER INDEX */
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: var(--vert);
@@ -176,9 +180,31 @@ footer {
 
 /* PRODUIT ACCUEIL */
 
+.products-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .product-container {
     width: 20%;
     margin: 1.75%;
+    margin-bottom: 20px;
+}
+
+.product-image-container {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border: 5px solid var(--vert-hover);
+    border-radius: 5px;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .product-details {
@@ -196,12 +222,6 @@ footer {
     color: var(--vert-hover);
     margin: 0;
     padding: 10px 0;
-}
-
-.product-image {
-    max-width: 100%;
-    border: 5px solid var(--vert-hover);
-    border-radius: 5px;
 }
 
 .product-description {
