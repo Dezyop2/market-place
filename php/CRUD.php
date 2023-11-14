@@ -71,26 +71,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Erreur : " . $stmt->error;
             }
+        } elseif ($_POST["action"] == "read") {
+            
+                // READ (Lire un produit par ID)
+
+            if (isset($_POST["id"])) {
+                $id = $_POST["id"];
+                $sql = "SELECT * FROM produit WHERE id = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($product) {
+                        // Afficher les détails du produit
+                        echo "ID : " . $product["id"] . "<br>";
+                        echo "Nom : " . $product["nom"] . "<br>";
+                        echo "Prix : " . $product["prix"] . "<br>";
+                        echo "Description : " . $product["bio"] . "<br>";
+                        echo "Stock : " . $product["stock"] . "<br>";
+                        // Vous pouvez également afficher l'image ici si nécessaire
+                    } else {
+                        echo "Aucun produit trouvé pour cet ID.";
+                    }
+                } else {
+                    echo "Erreur : " . $stmt->error;
+                }
+            } else {
+                echo "Erreur : L'ID du produit n'a pas été spécifié.";
+            }
         }
-    }else{
-        echo "etape 1 raté";
+    } else {
+        echo "Étape 1 ratée";
     }
 }
-
-                // READ (Lire tous les produits)
-
-// $sql = "SELECT * FROM produit";
-// $result = $pdo->query($sql);
-// if ($result) {
-//     echo "<h2>Liste des produits :</h2>";
-//     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-//         echo "ID : " . $row["id"] . ", Nom : " . $row["nom"] . ", Prix : " . $row["prix"] . "<br>";
-//     }
-// } else {
-//     echo "Aucun produit trouvé.";
-// }
-
-// $pdoManager->closeConnection();
 
 $pdo = null;
 

@@ -5,6 +5,15 @@ html, body {
     height: 100%;
 }
 
+.titre_stock {
+    font-size: xx-large; 
+    font-weight: bold;
+    font-variant: small-caps;
+    color: var(--vert-fonce);
+    margin: 15px;
+    text-decoration: none;
+}
+
 /* NAV BARRE INDEX */
 
 nav {
@@ -163,6 +172,51 @@ footer {
     font-variant: small-caps;
     color: var(--vert-hover);
     margin-bottom: 20px;
+}
+
+/* PRODUIT ACCUEIL */
+
+.product-container {
+    width: 20%;
+    margin: 1.75%;
+}
+
+.product-details {
+    background-color: var(--vert);
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-title {
+    font-variant: small-caps;
+    color: var(--vert-hover);
+    margin: 0;
+    padding: 10px 0;
+}
+
+.product-image {
+    max-width: 100%;
+    border: 5px solid var(--vert-hover);
+    border-radius: 5px;
+}
+
+.product-description {
+    margin: 10px 0;
+    font-weight: bold;
+    color: var(--vert-hover);
+}
+
+.product-price {
+    font-weight: bold;
+    color: var(--vert-hover);
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+    border-right: 1px solid var(--vert-hover);
 }
 
 /* COULEURS */
