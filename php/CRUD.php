@@ -60,30 +60,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 break;
 
             case "delete":
-                // DELETE (Supprimer un produit)
+                // DELETE (Mettre à jour la valeur 'suppr' à 1)
                 if (isset($_POST["id"])) {
                     $id = $_POST["id"];
-                    $sql = "DELETE FROM produit WHERE id = ?";
+                    $sql = "UPDATE produit SET suppr = 1 WHERE id = ?";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindParam(1, $id, PDO::PARAM_INT);
-
+            
                     if ($stmt->execute()) {
-                        echo "Le produit a été supprimé avec succès.";
+                        echo "Le produit a été marqué comme supprimé avec succès.";
                     } else {
-                        echo "Erreur lors de la suppression du produit : " . $stmt->error;
+                        echo "Erreur lors de la mise à jour de la valeur 'suppr' pour le produit : " . $stmt->error;
                     }
                 } else {
                     echo "Erreur : Identifiant du produit manquant.";
                 }
                 break;
+                
 
             case "read":
-                // READ (Lire un produit par ID)
-                if (isset($_POST["id"])) {
-                    $id = $_POST["id"];
-                    $sql = "SELECT * FROM produit WHERE id = ?";
+                // READ (Lire un produit par nom)
+                if (isset($_POST["nom"])) {
+                    $nom = $_POST["nom"];
+                    $sql = "SELECT * FROM produit WHERE nom = ?";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                    $stmt->bindParam(1, $nom, PDO::PARAM_STR);
                     
                     if ($stmt->execute()) {
                         $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -96,13 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "Stock : " . $product["stock"] . "<br>";
                             // Vous pouvez également afficher l'image ici si nécessaire
                         } else {
-                            echo "Aucun produit trouvé pour cet ID.";
+                            echo "Aucun produit trouvé pour ce nom.";
                         }
                     } else {
                         echo "Erreur lors de la lecture du produit : " . $stmt->error;
                     }
                 } else {
-                    echo "Erreur : L'ID du produit n'a pas été spécifié.";
+                    echo "Erreur : Le nom du produit n'a pas été spécifié.";
                 }
                 break;
 

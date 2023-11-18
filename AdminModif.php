@@ -1,77 +1,60 @@
-<?php include_once 'templates/headerAdmin.html'; ?>
-
-<form method="GET" action="adminModif.php">
-    <label for="product_name">Choisir un produit :</label>
-    <input type="text" id="product_name" name="product_name" placeholder="Nom du produit">
-    <input type="submit" value="Modifier">
-</form>
-
 <?php
-// Traitement du formulaire
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["product_name"])) {
-    $selectedProductName = $_GET["product_name"];
+include_once 'templates/headerAdmin.html';
 
-    // Appeler la fonction de lecture du produit par nom depuis CRUD.php
-    $product = readProductByName($selectedProductName);
+require_once 'php/connexion.php';
+$pdoManager = new DBManagement("market-nws");
+$pdo = $pdoManager->getPDO();
 
-    if ($product) {
-        // Afficher les détails du produit
-        echo "ID : " . $product["id"] . "<br>";
-        echo "Nom : " . $product["nom"] . "<br>";
-        echo "Prix : " . $product["prix"] . "<br>";
-        echo "Description : " . $product["bio"] . "<br>";
-        echo "Stock : " . $product["stock"] . "<br>";
-        // Vous pouvez également afficher l'image ici si nécessaire
-    } else {
-        echo "Aucun produit trouvé pour ce nom.";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["modifier"])) {
+    $idproduit = $_POST["idproduit"];
+    $noms = $_POST["nom"];
+    $prix = $_POST["prix"];
+    $bio = $_POST["bio"];
+    $stock = $_POST["stock"];
+
+    // Mettre à jour les produits dans la base de données
+    for ($i = 0; $i < count($idproduit); $i++) {
+        $sql = "UPDATE produit SET nom = ?, prix = ?, bio = ?, stock = ? WHERE idproduit = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $noms[$i], PDO::PARAM_STR);
+        $stmt->bindParam(2, $prix[$i], PDO::PARAM_STR);
+        $stmt->bindParam(3, $bio[$i], PDO::PARAM_STR);
+        $stmt->bindParam(4, $stock[$i], PDO::PARAM_STR);
+        $stmt->bindParam(5, $idproduit[$i], PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            echo "Le produit avec l'ID " . $idproduit[$i] . " a été mis à jour avec succès.<br>";
+        } else {
+            echo "Erreur lors de la mise à jour du produit avec l'ID " . $idproduit[$i] . " : " . $stmt->error . "<br>";
+        }
     }
 }
-?>
 
-<?php
-// Inclure le fichier CRUD.php pour la gestion des opérations CRUD
-require_once 'php/CRUD.php';
+$sql = "SELECT * FROM produit WHERE suppr = 0";
+$stmt = $pdo->query($sql);
 
-// Vérifier si l'ID du produit à modifier est spécifié
-if (isset($_GET['id'])) {
-    // Récupérer l'ID du produit à partir de l'URL
-    $id = $_GET['id'];
+if ($stmt) {
+    echo '<form method="POST" action="AdminModif.php">';
+    echo '<div class="tableau-admin"><table><thead>';
+    echo '<tr><th>ID</th><th>Nom</th><th>Prix</th><th>Bio</th><th>Stock</th><th>Modifier</th></tr>';
+    echo '</thead><tbody>';
 
-    // Appeler la fonction de lecture du produit par ID depuis CRUD.php
-    $product = readProductById($id);
-
-    if ($product) {
-        // Afficher le formulaire de modification
-?>
-        <form class="product-form" method="POST" action="php/CRUD.php" enctype="multipart/form-data">
-            <input type="hidden" name="action" value="update">
-            <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-
-            <label for="nom" class="form-label">Nom du produit :</label>
-            <input type="text" id="nom" name="nom" class="form-input" value="<?php echo $product['nom']; ?>" required><br>
-            
-            <label for="prix" class="form-label">Prix du produit :</label>
-            <input type="text" id="prix" name="new_prix" class="form-input" value="<?php echo $product['prix']; ?>" required><br>
-            
-            <label for="bio" class="form-label">Description du produit :</label>
-            <input type="text" id="bio" name="bio" class="form-input" value="<?php echo $product['bio']; ?>" required><br>
-            
-            <label for="stock" class="form-label">Stock du produit :</label>
-            <input type="text" id="stock" name="stock" class="form-input" value="<?php echo $product['stock']; ?>" required><br>
-            
-            <label for="image" class="form-label">Image du produit :</label>
-            <input type="file" id="image" name="image" class="image" accept="image/*"><br>
-            
-            <!-- Afficher l'image actuelle -->
-            <img src="data:<?php echo $product['image_type']; ?>;base64,<?php echo base64_encode($product['image_data']); ?>" alt="<?php echo $product['nom']; ?>" class="current-image">
-            
-            <input type="submit" value="Mettre à jour le produit" class="submit-button">
-        </form>
-<?php
-    } else {
-        echo "Aucun produit trouvé pour cet ID.";
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo '<tr>';
+        echo '<td>' . $row["idproduit"] . '</td>';
+        echo '<td><input type="text" name="nom[]" value="' . $row["nom"] . '"></td>';
+        echo '<td><input type="text" name="prix[]" value="' . $row["prix"] . '"></td>';
+        echo '<td><input type="text" name="bio[]" value="' . $row["bio"] . '"></td>';
+        echo '<td><input type="text" name="stock[]" value="' . $row["stock"] . '"></td>';
+        echo '<td><input type="hidden" name="idproduit[]" value="' . $row["idproduit"] . '"><input class="boutton-modif" type="submit" name="modifier" value="Modifier"></td>';
+        echo '</tr>';
     }
+
+    echo '</tbody></table></div>';
+    echo '</form>';
 } else {
-    echo "L'ID du produit n'a pas été spécifié.";
+    echo "Erreur lors de la récupération des produits : " . $pdo->error;
 }
+
+$pdo = null;
 ?>

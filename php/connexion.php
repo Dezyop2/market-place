@@ -3,7 +3,7 @@ class DBManagement {
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $port = '3306';
+    private $port = '';
     private $db_name;
     private $pdo;
 
