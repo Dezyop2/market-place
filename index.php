@@ -10,7 +10,7 @@ require_once 'php/connexion.php';
 $pdoManager = new DBManagement("market-nws");
 $pdo = $pdoManager->getPDO();
 
-$sql = "SELECT * FROM produit ORDER BY stock ASC LIMIT 4";
+$sql = "SELECT * FROM produit WHERE suppr = 0 ORDER BY stock ASC LIMIT 4";
 $stmt = $pdo->query($sql);
 
 if ($stmt) {
