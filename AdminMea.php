@@ -5,33 +5,7 @@ require_once 'php/connexion.php';
 $pdoManager = new DBManagement("market-nws");
 $pdo = $pdoManager->getPDO();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["modifier"])) {
-        // Mettre à jour les produits dans la base de données
-        if (isset($_POST["idproduit"])) {
-            $idproduit = $_POST["idproduit"];
-            $noms = $_POST["nom"];
-            $prix = $_POST["prix"];
-            $bio = $_POST["bio"];
-            $stock = $_POST["stock"];
-
-            for ($i = 0; $i < count($idproduit); $i++) {
-                $sql = "UPDATE produit SET nom = ?, prix = ?, bio = ?, stock = ? WHERE idproduit = ?";
-                $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(1, $noms[$i], PDO::PARAM_STR);
-                $stmt->bindParam(2, $prix[$i], PDO::PARAM_STR);
-                $stmt->bindParam(3, $bio[$i], PDO::PARAM_STR);
-                $stmt->bindParam(4, $stock[$i], PDO::PARAM_STR);
-                $stmt->bindParam(5, $idproduit[$i], PDO::PARAM_INT);
-
-                if ($stmt->execute()) {
-                    echo "Le produit avec l'ID " . $idproduit[$i] . " a été mis à jour avec succès.<br>";
-                } else {
-                    echo "Erreur lors de la mise à jour du produit avec l'ID " . $idproduit[$i] . " : " . $stmt->error . "<br>";
-                }
-            }
-        }
-    } elseif (isset($_POST["supprimer"])) {
+    if (isset($_POST["supprimer"])) {
         // Mettre à jour la valeur 'suppr' à 1 pour le produit
         if (isset($_POST["idproduit"])) {
             $idproduit = key($_POST["supprimer"]);
@@ -46,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-}
 
 $sql = "SELECT * FROM produit WHERE suppr = 0";
 $stmt = $pdo->query($sql);

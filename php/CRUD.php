@@ -59,23 +59,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 break;
 
-            case "delete":
-                // DELETE (Mettre à jour la valeur 'suppr' à 1)
-                if (isset($_POST["id"])) {
-                    $id = $_POST["id"];
-                    $sql = "UPDATE produit SET suppr = 1 WHERE id = ?";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindParam(1, $id, PDO::PARAM_INT);
-            
-                    if ($stmt->execute()) {
-                        echo "Le produit a été marqué comme supprimé avec succès.";
-                    } else {
-                        echo "Erreur lors de la mise à jour de la valeur 'suppr' pour le produit : " . $stmt->error;
+                case "delete":
+                    // DELETE (Mettre à jour la valeur 'suppr' à 1)
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        if (isset($_POST["supprimer"])) {
+                            $idproduit = key($_POST["supprimer"]);
+                            $sql = "UPDATE produit SET suppr = 1 WHERE idproduit = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(1, $idproduit, PDO::PARAM_INT);
+                
+                            if ($stmt->execute()) {
+                                echo "Le produit avec l'ID " . $idproduit . " a été marqué comme supprimé avec succès.<br>";
+                            } else {
+                                echo "Erreur lors de la mise à jour de la valeur 'suppr' pour le produit avec l'ID " . $idproduit . " : " . $stmt->error . "<br>";
+                            }
+                        }
                     }
-                } else {
-                    echo "Erreur : Identifiant du produit manquant.";
-                }
-                break;
+                    break;
+                
                 
 
             case "read":
