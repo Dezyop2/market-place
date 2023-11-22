@@ -10,12 +10,15 @@
 <body>
     <nav>
         <a href="index.php" class="titre">ACCUEIL</a>
-        <form class="search-form" role="search">
-            <input class="search-input" type="search" placeholder="Search" aria-label="Search">
-            <button class="search-button" type="submit">Search</button>
-        </form>
+        <form class="search-form" role="search" action="recherche.php" method="GET">
+            <input class="search-input" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="search-button" type="submit">Rechercher</button>
+        </form>        
         <form action="index2.php">
             <button class="all-goods" type="submit">Tout les produits</button>
+        </form>
+        <form action="cart.php">
+            <button class="all-goods" type="submit">Mon panier</button>
         </form>
         <a href="connexionAdmin.html" class="profile-icon profil">
             <i class="fas fa-user-circle"></i>

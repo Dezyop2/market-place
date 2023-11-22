@@ -239,6 +239,10 @@ footer {
     border-right: 1px solid var(--vert-hover);
 }
 
+.all-info {
+    margin: 5%;
+}
+
 /* COULEURS */
 
 :root{
