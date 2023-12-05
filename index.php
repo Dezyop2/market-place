@@ -20,6 +20,7 @@ if ($stmt) {
         echo '<div class="products-container">';
         foreach ($products as $product) {
             echo '<div class="product-container">';
+            echo '<a href="produit.php?id=' . $product["idproduit"] . '" class="product-link">';
             echo '<div class="product-details">';
             echo "<h2 class='product-title'>" . $product["nom"] . "</h2>";
             echo '<div class="product-image-container">';
@@ -27,6 +28,7 @@ if ($stmt) {
             echo '</div>';
             echo "<p class='product-price'><a class='titre'>prix : </a>" . $product["prix"] . "</p>";
             echo '</div>';
+            echo '</a>';
             echo '</div>';
         }
         echo '</div>';

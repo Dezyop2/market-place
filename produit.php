@@ -24,6 +24,12 @@ if (isset($_GET['id'])) {
             echo '</div>';
             echo "<p><a>Description : </a>" . $product["bio"] . "</p>";
             echo "<p><a>prix : </a>" . $product["prix"] . "</p>";
+            echo '<form method="post" action="cart.php">';
+            echo '<input type="hidden" name="idproduit" value="' . $product["idproduit"] . '">';
+            echo '<input type="hidden" name="nom" value="' . $product["nom"] . '">';
+            echo '<input type="hidden" name="prix" value="' . $product["prix"] . '">';
+            echo '<input type="submit" name="ajouter_panier" value="Ajouter au panier">';
+            echo '</form>';
             echo "</div>";
         } else {
             echo "Aucun produit trouvé pour l'ID spécifié.";
